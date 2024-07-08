@@ -15,7 +15,7 @@ const SocketProvider = ({ children, token }) => {
         }
         setConnection(
           new signalR.HubConnectionBuilder()
-            .withUrl('http://mohd3113-002-site5.dtempurl.com/userhub', {
+            .withUrl('https://localhost:7085/userhub', {
               transport: HttpTransportType.WebSockets,
               skipNegotiation: true,
               accessTokenFactory: () => token,
@@ -37,7 +37,8 @@ const SocketProvider = ({ children, token }) => {
 
       const invokeMessage = async (message) => {
         try {
-          await connection.invoke('Trip', message);
+
+          await connection.invoke('Trip', { event: 'RequestARide', data: JSON.stringify({latitude: 24234, longitude: 4234234})});
           console.log('Message sent: ', message);
         } catch (err) {
           console.error('Message failed: ', err);

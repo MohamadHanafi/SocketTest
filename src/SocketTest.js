@@ -9,7 +9,7 @@ function SocketTest() {
   const sendLocation = useCallback(async()=>{
       navigator.geolocation.getCurrentPosition(
         position => {
-          const data = {event: 'RequestARide', data: {latitude: position.coords.latitude, longitude: position.coords.longitude}}
+          const data = {event: 'RequestARide', data: JSON.stringify({latitude: position.coords.latitude, longitude: position.coords.longitude})}
           console.log('Trip', data)
           invokeMessage(JSON.stringify(data))
         }, err => {
